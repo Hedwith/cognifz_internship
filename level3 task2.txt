@@ -1,0 +1,19 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_csv("fifa19.csv")
+
+df['Nationality'] = df['Nationality'].str.replace(r'\W+', '').str.lower()
+nationality_counts = df['Nationality'].value_counts()
+
+nationality_dict = dict(nationality_counts.sort_values(ascending=False))
+plt.bar(nationality_dict.keys(), nationality_dict.values())
+
+plt.xlabel('Nationality')
+
+plt.ylabel('Frequency')
+
+plt.title('Bar Plot of Ten Most Common Nationalities')
+
+plt.xticks(rotation=90)
+
+plt.show()
