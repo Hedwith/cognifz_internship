@@ -1,0 +1,18 @@
+def fibonacci_sequence(n):
+    # Check if the input is a positive integer
+    if n <= 0 or not isinstance(n, int):
+        raise ValueError("Input must be a positive integer.")
+
+    # Initialize the first two terms of the sequence
+    a, b = 0, 1
+
+    # Generate the sequence up to the nth term
+    for i in range(n):
+        print(a)
+        a, b = b, a + b
+
+# Prompt the user to enter the number of terms
+n = int(input("Enter the number of terms: "))
+
+# Call the fibonacci_sequence function
+fibonacci_sequence(n)
