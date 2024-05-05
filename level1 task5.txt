@@ -1,0 +1,8 @@
+def is_palindrome(s):
+    s = s.lower()
+    s = ''.join(c for c in s if c.isalnum())
+    return s == s[::-1]
+print(is_palindrome("madam"))  # True
+print(is_palindrome("Cognifyz"))  # False
+print(is_palindrome("racecar"))  # True
+print(is_palindrome("Where Data Meets Intelligence python"))  # False
