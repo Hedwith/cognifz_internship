@@ -1,0 +1,12 @@
+from collections import Counter
+
+# Open the file and read its contents
+with open("example.txt", "r") as file:
+    text = file.read()
+
+# Split the text into words and count their occurrences
+word_counts = Counter(text.lower().split())
+
+# Sort the words alphabetically and print their counts
+for word, count in sorted(word_counts.items()):
+    print(f"{word}: {count}")
