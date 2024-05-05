@@ -1,0 +1,28 @@
+import os
+import requests
+import zipfile
+import pandas as pd
+def download_covid_data():
+    # Download the latest zip file
+    url = "https://github.com/CSSEGISandData/COVID-19/archive/master.zip"
+    response = requests.get(url)
+
+    # Extract the zip file
+    zip_file = zipfile.ZipFile(io.BytesIO(response.content))
+    zip_file.extractall()
+
+    # Read in the latest data
+    data_file = "COVID-19-master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+    data = pd.read_csv(data_file)
+
+    # Clean the data
+    data = data.drop(columns=['Province/State', 'Lat', 'Long'])
+    data = data.melt(id_vars=['Country/Region', 'Combined_Key'], var_name='Date', value_name='Confirmed')
+    data['Date'] = pd.to_datetime(data['Date'])
+
+    # Save the data to a file
+    data.to_csv('covid_data.csv', index=False)
+
+    # Remove the extracted files
+    os.remove(data_file)
+    os.remove('master.zip')
